@@ -31,13 +31,7 @@ const Dashboard = () => {
   const { mutate: deleteAllUserFiles } = trpc.deleteAllUserFiles.useMutation({
     onSuccess: () => {
       utils.getUserFiles.invalidate();
-    },
-    onMutate: () => {
-      // Add any onMutate actions if needed
-    },
-    onSettled: () => {
-      // Add any onSettled actions if needed
-    },
+    }
   });
 
   const handleDeleteAllFiles = () => {
@@ -46,20 +40,22 @@ const Dashboard = () => {
     }
   };
 
-
-
   return (
     <main className='mx-auto max-w-7xl md:p-10'>
       <div className='mt-8 flex flex-col items-start justify-between gap-4 border-b border-gray-200 pb-5 sm:flex-row sm:items-center sm:gap-0'>
         <h1 className='mb-3 font-bold text-5xl text-gray-900'>
           My Files
         </h1>
+
         <UploadButton />
-        
       </div>
-      <Button className="mt-5" onClick={handleDeleteAllFiles} variant='destructive'>
+
+      <div className="col-span-1 flex items-center justify-end gap-4 mt-4">
+        <Button onClick={handleDeleteAllFiles} variant='destructive'>
           Delete All Files
         </Button>
+
+      </div>
 
       {/* Display all user files */}
       {files && files?.length !== 0 ? (
